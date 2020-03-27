@@ -7,7 +7,8 @@ from datetime import datetime
 
 
 # GLOBAL VARIALBLES
-PATH = "C:\\Users\\bb\Documents\\projects\\MetaCleanse\\movie_env\\"
+#PATH = "C:\\Users\\bb\Documents\\projects\\MetaCleanse\\movie_env\\"
+PATH = os.getcwd()+"\\movie_env\\"
 PLEX_PATH = "D:\\Media\\Movies"
 #PATH = "C:\\Users\\bb\\Downloads\\"
 
