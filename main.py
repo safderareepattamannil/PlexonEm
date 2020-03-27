@@ -40,7 +40,13 @@ def process_name(fname):
                      ' (' + truncated[paren_insert_idx+1:] + ')')
     # Clear period delimiters
     result = parenthesized.replace('.', ' ')
-    return result
+
+    #  handle multi alterations
+   
+    if result == ' ()':
+        return fname
+    else:
+        return result
 
 
 # Get name of all subdirectories in parent folder
@@ -52,6 +58,7 @@ def rename_all(PATH):
         # Nest into grandchildren for mp4 files and rename that
         grandchildren = os.listdir(PATH+folder_name)
 
+        
         for grandchild in grandchildren:
             # Check that we are aren't processing files more than once
             if (process_name(grandchild) != grandchild):
@@ -86,8 +93,6 @@ def rename_all(PATH):
                 elif file_extension == ".txt":
                     os.remove(grandchild_path+".txt")
 
-        # Then check if we have completed this already to prevent reruns
-        original_name_cache = folder_name
         if (process_name(folder_name) != folder_name):
             try:
                 os.rename(PATH+folder_name, PATH+process_name(folder_name))
