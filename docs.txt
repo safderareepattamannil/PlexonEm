@@ -1,0 +1,42 @@
+Goal:
+Automate rename / metadata clean process for torrented movies
+
+Tickets:
+
+To do
+- add support for mkv files (ffmpeg python)
+- add support for avi files
+- remvoe all crap files inside it
+
+
+Doing:
+- create a listener to check for folder updates and remove torrent from transmission
+- add a logger to show which movies were moved
+
+Verify:
+-
+
+
+Done:
+- Create a parent directory
+- Figure out regex pattern to find how to remove all the characters after the year 
+    - sample names include:
+     How.To.Train.Your.Dragon.2010.1080p.BluRay.H264.AAC-RARBG
+     Kingsman.The.Golden.Circle.2017.720p.BluRay.H264.AAC-RARBG
+    - store original name for look up in folder for movie file
+    - probably look for first 4 numbers in a row then see if there is a dot that follows
+    - strip all characters after 
+    - then remove all periods
+    - insert parenthesis around the 4 numbers in a row to create format title (year)
+    - store that name 
+
+- Then go into folder and rename the file with the original parent name 
+
+- loop over all files to do this 
+- clear all metadata from file
+
+
+
+shutil.move("C:\\Users\\bb\\Downloads\\derp","C:\\Users\\bb\\Downloads\\plexbuffer")
+
+Icebox:
