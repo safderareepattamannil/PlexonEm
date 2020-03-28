@@ -65,8 +65,13 @@ def rename_all(PATH):
                 grandchild_path = PATH+folder_name + '\\'
                 file_extension = os.path.splitext(grandchild)[1]
 
-                possible_file_extensions = [".mp4"]  # ,".mkv"]
-
+                # Remove trash files
+                if file_extension ==  ".txt":                    
+                    os.remove(grandchild_path  + grandchild + ".txt")
+                if file_extension == ".exe":
+                    os.remove(grandchild_path  + grandchild + ".exe")
+                    
+    
                 # If file_extension is an mp4
                 if file_extension == ".mp4":
                     os.rename(grandchild_path + grandchild,
@@ -90,8 +95,6 @@ def rename_all(PATH):
                     os.rename(grandchild_path + grandchild,
                               grandchild_path+process_name(grandchild)+file_extension)
 
-                elif file_extension == ".txt":
-                    os.remove(grandchild_path+".txt")
 
         if (process_name(folder_name) != folder_name):
             try:
@@ -120,7 +123,7 @@ def move_engine(PATH, destination):
         print(" Currently moving", folder)
         bar.next()
         # Write to log
-        log_file.write("Succesfully completed {folder} at {current_time}".format(
+        log_file.write("Succesfully completed {folder} at {current_time} \n".format(
             folder=folder, current_time=current_time))
     bar.finish()
     # Close Logs
@@ -133,6 +136,3 @@ def activate_plex_engine():
         rename_all(PATH)
         move_engine(PATH, PLEX_PATH)
 
-
-if __name__ == "__main__":
-    activate_plex_engine()

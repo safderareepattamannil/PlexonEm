@@ -1,6 +1,7 @@
 import logging
 import ffmpeg
 
+
 logging.basicConfig(format='%(asctime)s %(message)s')
 
 for i in range(100):
