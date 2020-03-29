@@ -55,6 +55,7 @@ def rename_all(PATH):
 
     # Nest into each folder looking for mp4 files
     for folder_name in child_folders:
+       
         # Nest into grandchildren for mp4 files and rename that
         grandchildren = os.listdir(PATH+folder_name)
 
@@ -119,12 +120,16 @@ def move_engine(PATH, destination):
     for folder in child_folders:
         # Get get time
         current_time = datetime.now()
-        shutil.move(PATH+folder, destination)
-        print(" Currently moving", folder)
-        bar.next()
-        # Write to log
-        log_file.write("Succesfully completed {folder} at {current_time} \n".format(
-            folder=folder, current_time=current_time))
+        try:
+            print(" Currently moving", folder)
+            shutil.move(PATH+folder, destination)
+            bar.next()
+            # Write to log
+            log_file.write("Succesfully completed {folder} at {current_time} \n".format(
+                folder=folder, current_time=current_time))
+        except IOError:
+            print("File {folder} active in other application ".format(folder=folder))
+          
     bar.finish()
     # Close Logs
     log_file.close()
@@ -132,7 +137,13 @@ def move_engine(PATH, destination):
 
 def activate_plex_engine():
     file_count = len(os.listdir(PATH))
+    print("Scheduler Activated")
     if(file_count >= 1):
+        
         rename_all(PATH)
         move_engine(PATH, PLEX_PATH)
+    else:
+        print("Nothing to see here...")
 
+if __name__ == "__main__":
+    activate_plex_engine()
