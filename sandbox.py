@@ -1,9 +1,7 @@
-import os
-import sys
 import psutil
 
-p = os.getcwd() + "\\log.txt"
-print(p)
+
+fpath = "C:\\Users\\bb\\Downloads\\Friday.Night.Lights.S05.1080p.AMZN.WEBRip.DD5.1.x264-NTb[rartv]"
 
 def has_handle(fpath):
     for proc in psutil.process_iter():
@@ -16,5 +14,4 @@ def has_handle(fpath):
 
     return False
 
-
-print(has_handle(p))
+print(has_handle(fpath))
